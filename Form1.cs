@@ -67,7 +67,7 @@ namespace Git_Test
             bwg2.CancelAsync();
         }
 
-        List<BackgroundWorker> bgw_list = new List<BackgroundWorker>();
+        BackgroundWorker[] array = new BackgroundWorker[100];
         private void btnAvvio100_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < 100; i++)
@@ -78,9 +78,9 @@ namespace Git_Test
                 bwg1.DoWork += Bwg_DoWork;
                 bwg1.RunWorkerCompleted += Bwg_RunWorkerCompleted;
                 bwg1.ProgressChanged += Bwg_ProgressChanged;
-                bgw_list.Add(bwg1);
+                array[i] = bwg1;
             }
-            foreach (var bwg in bgw_list)
+            foreach (var bwg in array)
             {
                 bwg.RunWorkerAsync(txtAvvia100);
             }
@@ -88,7 +88,7 @@ namespace Git_Test
 
         private void btnStop100_Click(object sender, EventArgs e)
         {
-            foreach (var bwg in bgw_list)
+            foreach (var bwg in array)
             {
                 bwg.CancelAsync();
             }
